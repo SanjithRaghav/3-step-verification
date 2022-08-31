@@ -16,9 +16,9 @@ const User=mongoose.model("user",userSchema);
 
 app.listen(3000);
 app.get('/',(req, res) => {
-    res.render('form3.ejs',{});
+    //res.render('form3.ejs',{});
 
-   // res.render('form1.ejs',{p:'',i:''});
+    res.render('form1.ejs',{p:'',i:''});
 })
 var data;
 app.post('/',(req, res) => {
@@ -47,7 +47,7 @@ app.post('/',(req, res) => {
     }
     else if(req.body.button==='form2'){
         if (data.code==req.body.code){
-            res.send('code correct');
+            res.render('form3.ejs',{});
         }
         else{
             res.render('form2.ejs',{p:'*code incorrect'});
