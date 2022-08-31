@@ -2,6 +2,7 @@ const express=require('express')
 const mongoose=require('mongoose')
 const bodyParser = require('body-parser')
 const app=express()
+
 mongoose.connect("mongodb://localhost:27017/formDB",{useNewUrlParser:true})
 app.set('view engine', 'ejs')
 const userSchema =new  mongoose.Schema({ 
@@ -15,7 +16,9 @@ const User=mongoose.model("user",userSchema);
 
 app.listen(3000);
 app.get('/',(req, res) => {
-    res.render('form1.ejs',{p:'',i:''});
+    res.render('form3.ejs',{});
+
+   // res.render('form1.ejs',{p:'',i:''});
 })
 var data;
 app.post('/',(req, res) => {
@@ -43,12 +46,20 @@ app.post('/',(req, res) => {
         })
     }
     else if(req.body.button==='form2'){
-        console.log(data)
         if (data.code==req.body.code){
             res.send('code correct');
         }
         else{
             res.render('form2.ejs',{p:'*code incorrect'});
+        }
+    }
+    else{
+        console.log(req.body)
+        if(req.body.button=='1'){
+            res.send('succesfully logged in');
+        }
+        else{
+            res.render('form3.ejs',{});
         }
     }
 })
